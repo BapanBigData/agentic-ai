@@ -7,4 +7,9 @@ langchain-core
 langchain-community
 anthropic
 defusedxml
+pypdf
+pymupdf
+bs4
+arxiv
+wikipedia
 python-dotenv
