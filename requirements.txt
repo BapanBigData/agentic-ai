@@ -15,3 +15,6 @@ wikipedia
 langchain_huggingface
 python-dotenv
 sentence-transformers
+faiss-cpu
+langchain_google_genai
+pandas
