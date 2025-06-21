@@ -20,3 +20,4 @@ langchain_google_genai
 pandas
 langchain-pinecone
 youtube_search
+langgraph
