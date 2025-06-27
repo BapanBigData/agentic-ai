@@ -22,3 +22,4 @@ langchain-pinecone
 youtube_search
 langgraph
 duckduckgo-search
+yfinance
