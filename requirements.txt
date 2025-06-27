@@ -21,3 +21,4 @@ pandas
 langchain-pinecone
 youtube_search
 langgraph
+duckduckgo-search
