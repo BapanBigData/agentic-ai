@@ -24,3 +24,6 @@ langgraph
 duckduckgo-search
 yfinance
 langgraph
+langchain-tavily
+matplotlib
+seaborn
