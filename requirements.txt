@@ -27,3 +27,6 @@ langgraph
 langchain-tavily
 matplotlib
 seaborn
+autogen-agentchat
+autogen-core
+autogen-ext
