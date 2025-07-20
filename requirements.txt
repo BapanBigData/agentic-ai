@@ -31,3 +31,4 @@ autogen-agentchat
 autogen-core
 autogen-ext
 ollama
+json-schema-to-pydantic
