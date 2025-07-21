@@ -36,7 +36,9 @@ model_client=OpenAIChatCompletionClient(
     'length': 360}
 """
 
-"url: https://catfact.ninja/fact"
+"""
+url: https://catfact.ninja/fact
+"""
 
 
 schema = {
