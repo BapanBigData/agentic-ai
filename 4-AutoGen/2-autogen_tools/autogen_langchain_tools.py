@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings("ignore", message="Importing debug from langchain")
+
 import os
 import certifi
 os.environ["SSL_CERT_FILE"] = certifi.where()
@@ -56,8 +59,8 @@ async def run_search():
     
     result = await search_agent.run(task=query)
     
-    print(result.messages[-1])
-    print('\n')
+    # print(result.messages[-1])
+    # print('\n')
     
     print(result.messages[-1].content)
 
