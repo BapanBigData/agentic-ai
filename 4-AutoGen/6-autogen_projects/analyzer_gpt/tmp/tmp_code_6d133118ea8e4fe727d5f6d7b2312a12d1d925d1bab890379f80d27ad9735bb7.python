@@ -1,0 +1,15 @@
+def add_two_integers(a: int, b: int) -> int:
+    """
+    Returns the sum of two integers.
+
+    Parameters:
+    a (int): First integer
+    b (int): Second integer
+
+    Returns:
+    int: Sum of a and b
+    """
+    return a + b
+    
+result = add_two_integers(5, 7)
+print("The sum of two integers is:", result)
