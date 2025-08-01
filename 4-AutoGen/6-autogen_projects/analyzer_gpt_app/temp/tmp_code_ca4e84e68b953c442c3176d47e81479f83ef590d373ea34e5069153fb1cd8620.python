@@ -1,0 +1,8 @@
+import pandas as pd
+
+# Load the data
+data = pd.read_csv('iris.csv')
+
+# Display the first few rows and the column names
+print(data.head())
+print(data.columns)

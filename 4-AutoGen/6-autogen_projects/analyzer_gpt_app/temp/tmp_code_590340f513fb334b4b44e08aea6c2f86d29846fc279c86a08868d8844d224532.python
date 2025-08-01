@@ -1,0 +1,7 @@
+import pandas as pd
+
+# Load the data
+data = pd.read_csv('iris.csv')
+
+# Print the column names to understand the structure
+print("Columns in the dataset:", data.columns.tolist())
