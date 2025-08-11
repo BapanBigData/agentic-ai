@@ -35,3 +35,4 @@ json-schema-to-pydantic
 openai-agents
 docker
 autogen-ext[docker]
+autogen-ext[mcp]
