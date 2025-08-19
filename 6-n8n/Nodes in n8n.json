@@ -1,0 +1,618 @@
+{
+  "name": "Nodes in n8n",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4e60565a-89a5-47c2-ae96-0034ad39d6d1",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "path": "657bd536-0d24-4e5e-a96c-1454f6784871",
+        "options": {}
+      },
+      "id": "bc838fc3-9130-4638-a460-8c000d35f0c0",
+      "name": "Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -220
+      ],
+      "webhookId": "657bd536-0d24-4e5e-a96c-1454f6784871"
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "7162c1cd-058f-4d1f-b7c6-6b142e91fe3d",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        620,
+        -220
+      ],
+      "webhookId": "f725c920-d226-4352-9cd8-4795e8d4f223"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "dffb3bb8-1c83-4692-bd70-296cc773055b",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "path": "77b4cd57-43e5-497f-89f9-ff9f98419bc8",
+        "options": {}
+      },
+      "id": "659e35ed-927d-4d2d-8793-0ca09b867100",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -20
+      ],
+      "webhookId": "77b4cd57-43e5-497f-89f9-ff9f98419bc8"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "146e791f-f9f7-47bc-80dd-bdf3aa5f2ea5",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        620,
+        -20
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "dc7d428b-fbc1-4d17-8248-52e3e7101a52",
+      "name": "Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        400,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "baseId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        },
+        "tableId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        },
+        "additionalFields": {}
+      },
+      "id": "b2bfbd97-026d-45ea-9893-a7fa4722da4d",
+      "name": "Airtable Trigger",
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        620,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "8ae2fa89-1f72-4556-8b1b-64ef0457bd0b",
+      "name": "Get Gmail Message",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "13b9a34f-892d-41c1-97a5-09953d9f5fe0",
+      "name": "Search Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2ae8b25f-35fd-4e8d-89d7-6ca8c7186fec",
+      "name": "Create Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "c2bffe38-024c-45b5-932c-568ca778382f",
+      "name": "Send Gmail Message",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "pageId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        },
+        "options": {}
+      },
+      "id": "74696b20-04a5-4299-beb6-2c75481e754e",
+      "name": "Upsert Record",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2acd7b17-97cc-4251-8d27-731b1d8213b5",
+      "name": "Update Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "26245e46-97e9-4933-b7d7-f2100cc64ea9",
+      "name": "Add Gmail Label",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "pageId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        },
+        "options": {}
+      },
+      "id": "5237c542-330f-4791-944b-fce2afdaebaf",
+      "name": "Delete Notion Record",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        -20
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "45c65c02-c2ae-462d-ad40-6335ab937800",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "12936ff3-4df6-4de7-8637-eea75d289809",
+      "name": "Date & Time",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        -200
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "a5ecf913-bcdf-428a-aab7-88ec814ff288",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        2320,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "9bbc357a-243e-4710-bd75-166498a61cd1",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "31be2ae3-f528-4661-a4aa-2849e77cb58b",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "b25b5280-8289-4235-b82c-ac2cb946b07c",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        2340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "35dc7017-1da6-4826-b6f7-6cdc73e3004d",
+      "name": "Set Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        180
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "b0d13b01-681b-4bc5-8c5d-f08375088258",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        160
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "3078c574-504b-4268-bba2-522c795fe1f9",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6b61482d-f452-4028-bccc-2963b9bbe045",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "path": "e1880ddd-8d84-45fe-ac2a-08238730a68a",
+        "options": {}
+      },
+      "id": "5bf064c2-1c4b-4f4b-b1a3-649b4a7ac1cb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        180
+      ],
+      "webhookId": "e1880ddd-8d84-45fe-ac2a-08238730a68a"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        180
+      ],
+      "id": "e4457ca9-a816-431c-9efd-ce0a7d22f8ff",
+      "name": "When chat message received",
+      "webhookId": "0f9aef3c-0b93-4b82-8b22-39f1f0cf9b41"
+    },
+    {
+      "parameters": {
+        "resource": "block",
+        "operation": "getAll",
+        "blockId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1480,
+        -20
+      ],
+      "id": "6e96b146-0834-48ff-983b-c4260a30526b",
+      "name": "Get many child blocks"
+    },
+    {
+      "parameters": {
+        "content": "## Trigger Node\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
+        "height": 700,
+        "width": 780,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -340
+      ],
+      "id": "b6667c9a-c2b4-463a-8224-2eea22a425c6",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Action Node\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
+        "height": 700,
+        "width": 780,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        940,
+        -340
+      ],
+      "id": "9fff0229-47eb-4a4d-b3ad-ba1e0c4a5034",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2340,
+        180
+      ],
+      "id": "b898734a-d566-4bf0-8c85-d1f12857435d",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "content": "## Action Node\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
+        "height": 700,
+        "width": 780,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        -340
+      ],
+      "id": "bb9b05e4-947c-4903-9d19-3d5f67468ddb",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        3300,
+        -240
+      ],
+      "id": "0bf68f40-befb-4e8e-b414-d2c5ed93e208",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.sentimentAnalysis",
+      "typeVersion": 1.1,
+      "position": [
+        3300,
+        -40
+      ],
+      "id": "2e939718-2c2b-4277-afd7-5fb99777a896",
+      "name": "Sentiment Analysis"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        3300,
+        160
+      ],
+      "id": "e447f660-e18a-4dd1-81c0-1c7e3a2e6594",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        3700,
+        -240
+      ],
+      "id": "fdea1e6c-bf5d-43b2-ad23-18849aa29175",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+      "typeVersion": 1.6,
+      "position": [
+        3700,
+        -40
+      ],
+      "id": "80ba66bd-8c97-4fc0-840e-0c8474d32c5a",
+      "name": "Question and Answer Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        3760,
+        160
+      ],
+      "id": "04ba428f-de57-4db4-ad27-2c529bf7f777",
+      "name": "Embeddings HuggingFace Inference"
+    },
+    {
+      "parameters": {
+        "content": "## Action Node\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
+        "height": 700,
+        "width": 780,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3240,
+        -360
+      ],
+      "id": "2d922041-ab7a-41fa-a706-bd4464535cd5",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "height": 720,
+        "width": 400
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2720,
+        -360
+      ],
+      "typeVersion": 1,
+      "id": "062f1204-ea0b-4659-8349-21d1b88950cf",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4bee744f-8238-4842-a246-af12b1532887",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "10eb43134b9000c73d2110988980c8ade24ec8c0df57e5ddc538803f7ca32f00"
+  },
+  "id": "R5tF7ccWhZ9wJcWd",
+  "tags": []
+}

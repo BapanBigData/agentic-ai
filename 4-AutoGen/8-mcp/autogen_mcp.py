@@ -45,5 +45,5 @@ async def main(main_task):
     return
 
 if(__name__=='__main__'):
-    main_task = 'What is the time now?'
+    main_task = 'What is the time in Yakutsk now?'
     asyncio.run(main(main_task))

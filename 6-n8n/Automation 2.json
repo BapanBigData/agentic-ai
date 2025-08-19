@@ -1,0 +1,424 @@
+{
+  "name": "Automation 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6580b70a-f340-47bc-bc09-4ad38c5da041",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1KLFg__r2WciKW7r9Vq36XWHgqT4AfaGHhZ6f5q7JeOY",
+          "mode": "list",
+          "cachedResultName": "Potential_Customers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KLFg__r2WciKW7r9Vq36XWHgqT4AfaGHhZ6f5q7JeOY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KLFg__r2WciKW7r9Vq36XWHgqT4AfaGHhZ6f5q7JeOY/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a1065b8c-524b-457e-b9a0-4327e953a05a",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xLWMT7U3wD8t3LGu",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.genderize.io/",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ $json.Name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "aa264501-3d1b-413c-b10e-471b8ddc7ce6",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "url": "https://api.nationalize.io/",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ $json.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        832,
+        0
+      ],
+      "id": "fc2ca994-909a-4958-a0c2-d3ea24389953",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.agify.io/",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "={{ $json.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "ca54abfe-add4-4d17-9fb9-65060a37f330",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1KLFg__r2WciKW7r9Vq36XWHgqT4AfaGHhZ6f5q7JeOY",
+          "mode": "list",
+          "cachedResultName": "Potential_Customers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KLFg__r2WciKW7r9Vq36XWHgqT4AfaGHhZ6f5q7JeOY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KLFg__r2WciKW7r9Vq36XWHgqT4AfaGHhZ6f5q7JeOY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Id": "={{ $('Get row(s) in sheet').item.json.Id }}",
+            "Name": "={{ $('Get row(s) in sheet').item.json.Name }}",
+            "Number": "={{ $('Get row(s) in sheet').item.json.Number }}",
+            "Budget": "={{ $('Get row(s) in sheet').item.json.Budget }}",
+            "Gender": "={{ $('HTTP Request').item.json.gender }}",
+            "Age": "={{ $('HTTP Request2').item.json.age }}",
+            "Nationality": "={{ $('HTTP Request1').item.json.country.first().country_id}}"
+          },
+          "matchingColumns": [
+            "Id"
+          ],
+          "schema": [
+            {
+              "id": "Id",
+              "displayName": "Id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Number",
+              "displayName": "Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nationality",
+              "displayName": "Nationality",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1040,
+        0
+      ],
+      "id": "177555f0-923b-4436-8079-1141f8305665",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xLWMT7U3wD8t3LGu",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "bapanbairagya96@gmail.com",
+        "subject": "={{ $json.message.content.subject }}",
+        "message": "={{ $json.message.content.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1568,
+        0
+      ],
+      "id": "61b1e33b-d63b-4696-a0f2-071d36e440ac",
+      "name": "Send a message",
+      "webhookId": "29806f34-aa01-4c6a-af06-23b2e346e7b7",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "iiNVQEA0hQyCyzQA",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Hey you are a email writer, your aim is to provide me with email which I then will be sending on my email ID.\n\nBelow is the format :\n\n```\nHey Bapan,\n\nnew client {{ $json.Name }}  has signed up, below are the details.\n\nNumber : {{ $json.Number }}\nBudget : {{ $json.Budget }}\n\n\nBelow is the expected gender, age and nationality.\nngender : {{ $json.Gender }}\nage :  {{ $json.Age }}\nnationality : {{ $json.Nationality }}\n\n\nDo make sure to connect with him at {{ $json.Number }}.\n\nThanks\nYour awesome workflow.\n\n```\n\nPlease make sure that the email is a lot in depth with more explanation and suggestion for the sale.\n\nStrictly give the output as json not missing any key. Below is the structure.\n\nAlso make sure that body is html friendly as i will be using this via API which supports html formatting and I should see the email more nicely and readable.\n\n{\n\"subject\": \n\"body\": \n}"
+            }
+          ]
+        },
+        "jsonOutput": "={{ true }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1248,
+        0
+      ],
+      "id": "0909c68c-4c80-4cec-b61a-7b33ff94967a",
+      "name": "Message a model",
+      "executeOnce": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "dWrNhqb6t2AKnbMO",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Message a model": [
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": {
+              "subject": "New Client Sign-Up: Mayank",
+              "body": "<p>Hey Bapan,</p>\n<p>I hope this email finds you well! I am excited to inform you that we have a new client who has just signed up. His name is <strong>Mayank</strong>, and below are his details:</p>\n<ul>\n    <li><strong>Client Number:</strong> 12345</li>\n    <li><strong>Budget:</strong> $50k</li>\n</ul>\n<p>As we prepare for the next steps, it's important to consider the following insights regarding Mayank:</p>\n<ul>\n    <li><strong>Expected Gender:</strong> Male</li>\n    <li><strong>Age:</strong> 40</li>\n    <li><strong>Nationality:</strong> IN</li>\n</ul>\n<p>Given his profile, I would recommend tailoring our approach to align with his preferences and expectations. Consider suggesting options that are popular among similar demographics, and make sure to address any specific requirements he might have stated during the sign-up process.</p>\n<p>Please make it a priority to connect with him at <strong>12345</strong>. Building a strong rapport early on will be beneficial in the long run, and it’s key to understanding how we can best serve his needs.</p>\n<p>Feel free to reach out if you need any assistance or further information! Let's aim to make this partnership a success.</p>\n<p>Thanks,<br>Your awesome workflow.</p>"
+            },
+            "refusal": null,
+            "annotations": []
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f48f10b9-cacc-424c-bb7e-ea6c0f99aa84",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c52052753821c313352dc391a04f301d659d1b15522f0256b273310fd03f24e5"
+  },
+  "id": "HYnoF5MTJC4QhD0i",
+  "tags": [
+    {
+      "name": "automation, ai",
+      "id": "QzgeEfCMIOdExbyp",
+      "createdAt": "2025-08-19T18:02:26.813Z",
+      "updatedAt": "2025-08-19T18:02:26.813Z"
+    },
+    {
+      "createdAt": "2025-08-18T12:46:37.109Z",
+      "updatedAt": "2025-08-18T12:46:37.109Z",
+      "id": "32I4GUrTwxRRMUnM",
+      "name": "nodes"
+    },
+    {
+      "createdAt": "2025-08-17T20:24:39.156Z",
+      "updatedAt": "2025-08-17T20:24:39.156Z",
+      "id": "1sqIqgqp0MDomRAp",
+      "name": "to learn"
+    }
+  ]
+}
