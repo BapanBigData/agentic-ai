@@ -36,3 +36,4 @@ openai-agents
 docker
 autogen-ext[docker]
 autogen-ext[mcp]
+openai-agents[litellm]
