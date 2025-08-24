@@ -1,0 +1,285 @@
+{
+  "name": "Gmail AI Reply",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "33fdfafc-b2a7-49f2-bff3-9dbe6d38cc5c",
+      "name": "check mails",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FKAcFrj7z5erA5IL",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "bc9c45b6-2de4-4b10-9686-50cab5e338f4",
+      "name": "Get a message",
+      "webhookId": "919e1c9d-6ae8-4e3d-a521-988b7b518c69",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FKAcFrj7z5erA5IL",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a email responding agent.  \n\nBelow are the content of latest email I got.  \n\nSubject : {{ $json.Subject }}  \nBody : {{ $json.snippet }}  \n\nYou have to do 2 things,  \n\n1. specify the label based on the email.  \nUse the tool to get all the labels and there Id and mention both of them properly.  \n\nlabel can be one of below :  \ncourse,  \ndoubts,  \nsponsorship  \n\n2. As a smart assistant please draft the response for me so that I can reply to my email. with subject and body  \n\nMake sure that reply is very respectable and wherever required please explain student doubt in depth with example and also make sure that reply follow a strict HTML format so it is easy to read.  \n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "5adb3d75-cf95-403e-be7d-9a0f34d5d844",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "resource": "label",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        512,
+        208
+      ],
+      "id": "3e2b4299-3737-4044-bba2-c16875891361",
+      "name": "Get many labels in Gmail",
+      "webhookId": "d653f3b7-92a8-4b4d-9496-4bddd47cb757",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FKAcFrj7z5erA5IL",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"label\": \"doubt\",\n  \"label_id\": \"12423512\",\n  \"subject\": \"doubt_answer\",\n  \"body\": \"Hey Thanks for reaching out\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        640,
+        256
+      ],
+      "id": "37718537-c930-4062-909e-a9455d324ee7",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        272,
+        208
+      ],
+      "id": "bde79221-cb80-47ee-8c05-d2570b94e793",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "i0RNFwsJF89IbF6r",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Get a message').item.json.id }}",
+        "labelIds": "={{ $json.output.label_id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        768,
+        0
+      ],
+      "id": "21f6284c-a840-4416-8c6a-1cf92eb463ea",
+      "name": "Add label to message",
+      "webhookId": "3354c069-7516-415a-b31d-0e695c18ba5c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FKAcFrj7z5erA5IL",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $('AI Agent').item.json.output.subject }}",
+        "emailType": "html",
+        "message": "={{ $('AI Agent').item.json.output.body }}",
+        "options": {
+          "threadId": "={{ $json.threadId }}",
+          "sendTo": "={{ $('Get a message').item.json.From }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        976,
+        0
+      ],
+      "id": "a638ca0c-77ee-469a-bfb8-0b9c086adca6",
+      "name": "Create a draft",
+      "webhookId": "6b15bc9a-94ec-4f41-b138-7c878520ef54",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FKAcFrj7z5erA5IL",
+          "name": "Gmail account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "check mails": {
+      "main": [
+        [
+          {
+            "node": "Get a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many labels in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Add label to message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add label to message": {
+      "main": [
+        [
+          {
+            "node": "Create a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a draft": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7ad7d7a7-9112-4c39-9e6d-d04d0659a581",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c52052753821c313352dc391a04f301d659d1b15522f0256b273310fd03f24e5"
+  },
+  "id": "s7FDyalo8xtDVhuk",
+  "tags": [
+    {
+      "name": "gmail",
+      "id": "VUrErDFzfUdiVJJk",
+      "createdAt": "2025-08-24T16:41:10.166Z",
+      "updatedAt": "2025-08-24T16:41:10.166Z"
+    },
+    {
+      "name": "agents",
+      "id": "ws4sq32FZgVCuk0K",
+      "createdAt": "2025-08-24T16:41:14.658Z",
+      "updatedAt": "2025-08-24T16:41:14.658Z"
+    }
+  ]
+}

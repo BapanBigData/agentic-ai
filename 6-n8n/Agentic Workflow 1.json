@@ -1,0 +1,145 @@
+{
+  "name": "Agentic Workflow 1",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ba948d0b-6d17-48a1-9ce6-cc0720501577",
+      "name": "When chat message received",
+      "webhookId": "bbff32f9-48bc-4edb-800e-9c05d3b6c5a7"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant. \n\nWhen ask about the task make sure to use `Google Task Tool`, to get appropriate number of task and provide a better response."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "fb29be64-5957-4b24-a534-8173d684f66d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1-distill-llama-70b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        0,
+        224
+      ],
+      "id": "499d0449-f813-4cb2-b07e-97ab35032841",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "0W0LBEtnNTnzgEaR",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        224
+      ],
+      "id": "f014abe9-0000-49eb-a990-6f525e0f2a35",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "task": "MTA4OTk3MzUyMjA1Mjg1MjQ3NzQ6MDow",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleTasksTool",
+      "typeVersion": 1,
+      "position": [
+        432,
+        224
+      ],
+      "id": "6680f6c4-169d-43da-9d33-458398886ee3",
+      "name": "Google Task Tool",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "OWkrdOPMMxi6tr9N",
+          "name": "Google Tasks account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Task Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c7a0be20-6cbb-4bbc-9999-bde1939275ba",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c52052753821c313352dc391a04f301d659d1b15522f0256b273310fd03f24e5"
+  },
+  "id": "6V3dCmtQj4mFpQS1",
+  "tags": []
+}
