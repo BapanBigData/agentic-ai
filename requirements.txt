@@ -37,3 +37,7 @@ docker
 autogen-ext[docker]
 autogen-ext[mcp]
 openai-agents[litellm]
+chromadb
+rank_bm25
+weaviate-client
+cohere
