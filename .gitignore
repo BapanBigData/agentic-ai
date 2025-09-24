@@ -200,3 +200,10 @@ llama2.pdf
 .cursor
 
 8-Advanced-RAG/Retrieval-Augmented-Generation.pdf
+8-Advanced-RAG/lost-in-middle-paper.pdf
+8-Advanced-RAG/harrypotter_1.pdf
+8-Advanced-RAG/store/*
+8-Advanced-RAG/rag-fusion/chroma_db/*
+8-Advanced-RAG/merge-retrived/store/*
+8-Advanced-RAG/flash-rank/faiss_index/*
+8-Advanced-RAG/flash-rank/faiss_index_llama/*

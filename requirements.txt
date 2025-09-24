@@ -41,3 +41,4 @@ chromadb
 rank_bm25
 weaviate-client
 cohere
+flashrank
