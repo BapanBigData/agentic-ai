@@ -2,7 +2,6 @@ import asyncio
 from teams.analyzer_gpt import getDataAnalyzerTeam
 from models.openai_model_client import get_model_client
 from configs.utils import getDockerCommandLineExecutor, start_docker_container, stop_docker_container
-from autogen_agentchat.messages import TextMessage
 
 
 async def main():
